@@ -26,7 +26,7 @@ print("Connected to server.")
 
 def send_songname(song_name):
     print("Sending instruction to the server...")
-    sock.sendall(song_name)
+    sock.sendall(song_name.encode('utf-8'))
     print("Instruction sent\n")
 
 def display_songs():
