@@ -30,7 +30,7 @@ def send_songname(song_name):
     print("Instruction sent\n")
 
 def display_songs():
-    songs = sock.recv(1024)
+    songs = sock.recv(1024).decode('utf-8')
     list_of_songs = songs.split(':')
     print("Songs currently in the playlist : \n")
     for i in list_of_songs:
