@@ -6,11 +6,26 @@ from bs4 import BeautifulSoup
 import urllib.request
 import pyaudio  
 import wave  
+import netifaces as ni
 
+# Get Ip Address
+def get_ip():
+	ip = ""
+	while(True):
+		try:
+			ip = ni.ifaddresses('eth0')[2][0]['addr']
+			break
+		except:
+			try:
+				ip = ni.ifaddresses('eth0')[2][0]['addr']
+				break
+			except:
+				continue
+	return ""
 # create an INET, STREAMing socket
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # bind the socket to a public host, and a well-known port
-serversocket.bind((socket.gethostname(), 8000))
+serversocket.bind((get_ip(), 8000))
 # become a server socket
 serversocket.listen(5)
 
@@ -161,7 +176,7 @@ def link_download(link):
 
 _thread.start_new_thread( player, () )
 
-print ("Server started!")
+print ("Server started! ",get_ip(),":8000")
 
 def send_list(sock, st = ''):
 	list = ''
