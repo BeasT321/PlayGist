@@ -7,6 +7,7 @@ import urllib.request
 import pyaudio  
 import wave  
 import netifaces as ni
+#from .compat import compat_str
 
 # Get Ip Address
 def get_ip():
@@ -17,7 +18,7 @@ def get_ip():
 			break
 		except:
 			try:
-				ip = ni.ifaddresses('eth0')[2][0]['addr']
+				ip = ni.ifaddresses('{D9AAD2D9-9776-4781-941D-DFD386F60002}')[2][0]['addr']
 				break
 			except:
 				continue
@@ -119,8 +120,7 @@ def search_link(name):
 		except KeyError:
 			continue
 
-	return s_name,"www.youtube.com"+links[0]
-
+	return youtube_dl.utils.sanitize_filename(s_name),"www.youtube.com"+links[0]
 
 def download(name):
 	name, link = search_link(name)
@@ -133,14 +133,15 @@ def download(name):
 				'preferredquality': '192',
 			}],
 			'download_archive': './downloaded',
-			'outtmpl': '%(title)s.%(ext)s',
-			#'restrictfilenames': True,
+			'outtmpl': name+'.%(ext)s',
+			'restrictfilenames': True,
 		}
 		with youtube_dl.YoutubeDL(ydl_opts) as ydl:
 			ydl.download([link])
 			playlist.append(name)
 			
-	except:
+	except Exception as e:
+		print (e)
 		pass
 
 
@@ -162,7 +163,7 @@ def link_download(link):
 			}],
 			'download_archive': './downloaded',
 			'outtmpl': name+'.%(ext)s',
-			#'restrictfilenames': True,
+			'restrictfilenames': True,
 		}
 		with youtube_dl.YoutubeDL(ydl_opts) as ydl:
 			ydl.download([link])

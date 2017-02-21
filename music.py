@@ -21,7 +21,7 @@ format : add/remove:<song_name>
 
 song_name = ''
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect(("10.4.89.16", 8000))
+sock.connect(("192.168.43.205", 8000))
 print("Connected to server.")
 
 def send_songname(song_name):
