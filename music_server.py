@@ -134,7 +134,7 @@ def download(name):
 			}],
 			'download_archive': './downloaded',
 			'outtmpl': name+'.%(ext)s',
-			'restrictfilenames': True,
+			#'restrictfilenames': True,
 		}
 		with youtube_dl.YoutubeDL(ydl_opts) as ydl:
 			ydl.download([link])
@@ -163,7 +163,7 @@ def link_download(link):
 			}],
 			'download_archive': './downloaded',
 			'outtmpl': name+'.%(ext)s',
-			'restrictfilenames': True,
+			#'restrictfilenames': True,
 		}
 		with youtube_dl.YoutubeDL(ydl_opts) as ydl:
 			ydl.download([link])
